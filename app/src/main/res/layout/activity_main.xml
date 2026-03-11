@@ -5,15 +5,202 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg"
     tools:context=".MainActivity">
 
+    <!-- Top Display -->
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tvExpression"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="start"
+        android:gravity="end"
+        android:maxLines="1"
+        android:text=""
+        android:textColor="@color/textSecondary"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="123 + 45" />
+
+    <TextView
+        android:id="@+id/tvDisplay"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="end"
+        android:maxLines="1"
+        android:text="0"
+        android:textColor="@color/textPrimary"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvExpression" />
+
+    <!-- Theme Toggle -->
+    <Switch
+        android:id="@+id/switchTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Dark mode"
+        android:textColor="@color/textSecondary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDisplay" />
+
+    <!-- History (BONUS) -->
+    <ScrollView
+        android:id="@+id/svHistory"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/panel"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/gridButtons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/switchTheme">
+
+        <TextView
+            android:id="@+id/tvHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text=""
+            android:textColor="@color/textSecondary"
+            android:textSize="14sp"
+            tools:text="5 + 5 = 10&#10;9 / 3 = 3" />
+    </ScrollView>
+
+    <!-- Button Grid -->
+    <GridLayout
+        android:id="@+id/gridButtons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:columnCount="4"
+        android:rowCount="5"
+        android:useDefaultMargins="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Row 1 -->
+        <Button
+            android:id="@+id/btnClear"
+            style="@style/CalcButton.Secondary"
+            android:text="C" />
+
+        <Button
+            android:id="@+id/btnDel"
+            style="@style/CalcButton.Secondary"
+            android:text="DEL" />
+
+        <Button
+            android:id="@+id/btnCustom"
+            style="@style/CalcButton.Accent"
+            android:text="CUST" />
+
+        <Button
+            android:id="@+id/btnDiv"
+            style="@style/CalcButton.Operator"
+            android:text="÷" />
+
+        <!-- Row 2 -->
+        <Button
+            android:id="@+id/btn7"
+            style="@style/CalcButton.Number"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/btn8"
+            style="@style/CalcButton.Number"
+            android:text="8" />
+
+        <Button
+            android:id="@+id/btn9"
+            style="@style/CalcButton.Number"
+            android:text="9" />
+
+        <Button
+            android:id="@+id/btnMul"
+            style="@style/CalcButton.Operator"
+            android:text="×" />
+
+        <!-- Row 3 -->
+        <Button
+            android:id="@+id/btn4"
+            style="@style/CalcButton.Number"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/btn5"
+            style="@style/CalcButton.Number"
+            android:text="5" />
+
+        <Button
+            android:id="@+id/btn6"
+            style="@style/CalcButton.Number"
+            android:text="6" />
+
+        <Button
+            android:id="@+id/btnSub"
+            style="@style/CalcButton.Operator"
+            android:text="−" />
+
+        <!-- Row 4 -->
+        <Button
+            android:id="@+id/btn1"
+            style="@style/CalcButton.Number"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/btn2"
+            style="@style/CalcButton.Number"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/btn3"
+            style="@style/CalcButton.Number"
+            android:text="3" />
+
+        <Button
+            android:id="@+id/btnAdd"
+            style="@style/CalcButton.Operator"
+            android:text="+" />
+
+        <!-- Row 5 -->
+        <Button
+            android:id="@+id/btn0"
+            style="@style/CalcButton.Number"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/btnDot"
+            style="@style/CalcButton.Number"
+            android:text="." />
+
+        <Button
+            android:id="@+id/btnSign"
+            style="@style/CalcButton.Secondary"
+            android:text="+/−" />
+
+        <Button
+            android:id="@+id/btnEq"
+            style="@style/CalcButton.Accent"
+            android:text="=" />
+    </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

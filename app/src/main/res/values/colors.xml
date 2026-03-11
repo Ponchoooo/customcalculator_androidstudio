@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="bg">#0F1220</color>
+    <color name="panel">#161A2C</color>
+
+    <color name="textPrimary">#FFFFFF</color>
+    <color name="textSecondary">#B9C0FF</color>
+
+    <color name="btnNumberBg">#1F2542</color>
+    <color name="btnNumberText">#FFFFFF</color>
+
+    <color name="btnOperatorBg">#2B3158</color>
+    <color name="btnOperatorText">#FFDC7A</color>
+
+    <color name="btnSecondaryBg">#202746</color>
+    <color name="btnSecondaryText">#B9C0FF</color>
+
+    <color name="btnAccentBg">#6C5CE7</color>
+    <color name="btnAccentText">#FFFFFF</color>
 </resources>
