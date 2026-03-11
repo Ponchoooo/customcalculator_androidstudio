@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -21,13 +20,12 @@ import java.text.DecimalFormat;
 public class MainActivity extends AppCompatActivity {
 
     // ====== Custom operator factor (change to match your last 3 digits) ======
-    // Example in prompt: ID ends 456 -> multiply by 4.56
-    private static final double CUSTOM_FACTOR = 4.56;
+    // Student ID: 11500160 -> last 3 digits 160 -> multiply by 1.60
+    private static final double CUSTOM_FACTOR = 1.60;
 
     // ====== State keys ======
     private static final String KEY_DISPLAY = "state_display";
     private static final String KEY_EXPRESSION = "state_expression";
-    private static final String KEY_HISTORY = "state_history";
     private static final String KEY_OPERAND_A = "state_operand_a";
     private static final String KEY_PENDING_OP = "state_pending_op";
     private static final String KEY_TYPING_B = "state_typing_b";
@@ -36,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
     // ====== Views ======
     private TextView tvDisplay;
     private TextView tvExpression;
-    private TextView tvHistory;
-    private ScrollView svHistory;
     private Switch switchTheme;
 
     // ====== Calculator state ======
@@ -75,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
     private void bindViews() {
         tvDisplay = findViewById(R.id.tvDisplay);
         tvExpression = findViewById(R.id.tvExpression);
-        tvHistory = findViewById(R.id.tvHistory);
-        svHistory = findViewById(R.id.svHistory);
         switchTheme = findViewById(R.id.switchTheme);
     }
 
@@ -217,9 +211,6 @@ public class MainActivity extends AppCompatActivity {
                 result = b;
         }
 
-        String expr = df.format(a) + " " + symbolFor(pendingOp) + " " + df.format(b);
-        appendHistory(expr + " = " + df.format(result));
-
         // Reset for next calculation
         operandA = null;
         pendingOp = 0;
@@ -235,8 +226,6 @@ public class MainActivity extends AppCompatActivity {
 
         double x = parseDisplay();
         double result = x * CUSTOM_FACTOR;
-
-        appendHistory("CUST(" + df.format(x) + ") = " + df.format(result));
 
         currentInput = new StringBuilder(df.format(result));
         // Keep any pending expression as-is (simple and predictable for 2-operand requirement)
@@ -296,15 +285,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void appendHistory(String line) {
-        String old = tvHistory.getText().toString();
-        String updated = old.isEmpty() ? line : (old + "\n" + line);
-        tvHistory.setText(updated);
-
-        // Scroll to bottom
-        svHistory.post(() -> svHistory.fullScroll(View.FOCUS_DOWN));
-    }
-
     private void render() {
         if (!isError) {
             tvDisplay.setText(currentInput.toString());
@@ -327,7 +307,6 @@ public class MainActivity extends AppCompatActivity {
 
         outState.putString(KEY_DISPLAY, currentInput.toString());
         outState.putString(KEY_EXPRESSION, tvExpression.getText().toString());
-        outState.putString(KEY_HISTORY, tvHistory.getText().toString());
         outState.putSerializable(KEY_OPERAND_A, operandA);
         outState.putChar(KEY_PENDING_OP, pendingOp);
         outState.putBoolean(KEY_TYPING_B, isTypingSecond);
@@ -337,7 +316,6 @@ public class MainActivity extends AppCompatActivity {
     private void restoreState(@NonNull Bundle state) {
         String display = state.getString(KEY_DISPLAY, "0");
         String expression = state.getString(KEY_EXPRESSION, "");
-        String history = state.getString(KEY_HISTORY, "");
 
         Object oa = state.getSerializable(KEY_OPERAND_A);
         operandA = (oa instanceof Double) ? (Double) oa : null;
@@ -348,7 +326,6 @@ public class MainActivity extends AppCompatActivity {
 
         currentInput = new StringBuilder(display);
         tvExpression.setText(expression);
-        tvHistory.setText(history);
 
         if (isError) {
             // If error happened, keep display text as whatever it was (usually message).

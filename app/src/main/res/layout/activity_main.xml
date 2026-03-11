@@ -56,46 +56,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvDisplay" />
 
-    <!-- History (BONUS) -->
-    <ScrollView
-        android:id="@+id/svHistory"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:background="@color/panel"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@id/gridButtons"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/switchTheme">
-
-        <TextView
-            android:id="@+id/tvHistory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text=""
-            android:textColor="@color/textSecondary"
-            android:textSize="14sp"
-            tools:text="5 + 5 = 10&#10;9 / 3 = 3" />
-    </ScrollView>
-
     <!-- Button Grid -->
     <GridLayout
         android:id="@+id/gridButtons"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:columnCount="4"
         android:rowCount="5"
         android:useDefaultMargins="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/switchTheme">
 
         <!-- Row 1 -->
         <Button
